@@ -1,0 +1,65 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static "css/search.css" %}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbarLogo"><img src="{% static "img/logo.png" %}"/></div>
+        <div>
+
+        </div>
+        <div class="navbarSelect">
+            <select>
+                <option>Localização</option>
+                <option>Aveiro</option>
+                <option>Beja</option>
+                <option>Braga</option>
+                <option>Bragança</option>
+                <option>Castelo Branco</option>
+                <option>Coimbra</option>
+                <option>Évora</option>
+                <option>Faro</option>
+                <option>Guarda</option>
+                <option>Leiria</option>
+                <option>Lisboa</option>
+                <option>Portalegre</option>
+                <option>Porto</option>
+                <option>Santarem</option>
+                <option>Setúbal</option>
+                <option>Viana do Castelo</option>
+                <option>Vila Real</option>
+                <option>Viseu</option>
+            </select>
+        </div>
+        <div class="navbarSelect">
+            <select>
+                <option>Localização</option>
+                <option>Aveiro</option>
+                <option>Beja</option>
+                <option>Braga</option>
+                <option>Bragança</option>
+                <option>Castelo Branco</option>
+                <option>Coimbra</option>
+                <option>Évora</option>
+                <option>Faro</option>
+                <option>Guarda</option>
+                <option>Leiria</option>
+                <option>Lisboa</option>
+                <option>Portalegre</option>
+                <option>Porto</option>
+                <option>Santarem</option>
+                <option>Setúbal</option>
+                <option>Viana do Castelo</option>
+                <option>Vila Real</option>
+                <option>Viseu</option>
+            </select>
+        </div>
+        <div class="navbarSelect">
+            <input type="text" class="navbarSearch" />
+        </div>
+
+    </div>
+    <div class="container" id="mapdiv">
+        {% include "map.html" %}
+    </div>
+</body>
