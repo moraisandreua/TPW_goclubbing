@@ -1,6 +1,17 @@
 {% load static %}
 <head>
     <link rel="stylesheet" type="text/css" href="{% static "css/search.css" %}">
+    <script>
+        function openModal(){
+            document.getElementById('modal').style.width="25vw";
+        }
+    </script>
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script>
+        function myfunction(){
+            $("#modal").css({"width": "25vw"});
+        }
+    </script>
 </head>
 <body>
     <div class="navbar">
@@ -55,11 +66,26 @@
             </select>
         </div>
         <div class="navbarSelect">
-            <input type="text" class="navbarSearch" />
+            <input type="text" class="navbarSearch" placeholder="Search..."/>
         </div>
 
     </div>
     <div class="container" id="mapdiv">
+        <div id="modal" class="modal">
+            <div class="info">
+                <div class="infoPic">
+                    <img src="{% static "img/logo_test.png" %}"/>
+                </div>
+                <div class="infoText">
+                    <div class="infoTextName">Bar do Fred</div>
+                    <div class="infoTextName">Bar</div>
+                </div>
+            </div>
+            <div class="modalImages">
+                <img src="{% static "img/exemplo_img.jpeg" %}"/>
+            </div>
+            <div></div>
+        </div>
         {% include "map.html" %}
     </div>
 </body>

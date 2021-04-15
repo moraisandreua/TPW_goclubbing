@@ -1,5 +1,6 @@
 *{
     box-sizing: border-box;
+    font-family: Verdana;
 }
 
 body{
@@ -15,6 +16,7 @@ body{
 
 .navbar div{
     width: 100%;
+    padding: 0px 10px;
 }
 
 .navbarLogo img{
@@ -44,6 +46,7 @@ body{
     height: calc(100vh - 94px);
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .searchBox{
@@ -71,10 +74,48 @@ body{
     height: 100%;
 }
 
+.modal{
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    background-color: white;
+    width: 0px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    overflow-y: scroll;
+    transition: 0.5s all;
+}
 
+.info{
+    display: flex;
+    height:64px;
+}
 
+.info .infoPic img{
+    height:64px;
+    border-radius: 32px;
+}
 
+.info .infoText{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5px;
+}
 
+.info .infoTextName{
+    display: flex;
+    align-items: center;
+    height:100%;
+}
 
+.modalImages{
+    margin-top: 15px;
+    width:100%;
+}
 
-
+.modalImages img{
+    width:100%;
+}
