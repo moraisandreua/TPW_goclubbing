@@ -1,15 +1,23 @@
+@font-face {
+    src: url("http://localhost:8080/static/font/Biko-regular.ttf");
+    font-family: Biko;
+}
+
 *{
     box-sizing: border-box;
-    font-family: Verdana;
+    font-family: Biko;
 }
 
 body{
     margin:0;
+    background-color: #a22db0;
 }
 
 .navbar{
+    background-color: white;
+
     width: 100vw;
-    padding: 15px;
+    padding: 7px 12px;
     display: flex;
     box-shadow: 0px 2px 2px #d3d3d3;
 
@@ -23,6 +31,10 @@ body{
     height: 64px;
 }
 
+.navbar div{
+  width: 100%;
+}
+
 .container{
     width:100vw;
     height:100vh;
@@ -31,21 +43,46 @@ body{
     padding: 15px;
 }
 
-.searchBox{
-    display: flex;
-    flex-direction: column;
-}
-
 .searchBox input{
-    border:1px solid lightgray;
+    border:1px solid white;
     padding: 10px;
     width: 400px;
     outline: none;
+    font-size: 12pt;
+    padding-left: 42px;
+
+    background-image: url("../img/loupe.png");
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    background-position: left 9px center;
 }
 
 .searchBox a{
     margin-top: 10px;
     color:black;
     text-decoration: none;
+    cursor: pointer;
+}
+
+.findButton{
+    background-color: black;
+    color: white;
+    border: 0px;
+    height: 38px;
+    width: 84px;
+}
+
+.searchBoxInputContainer{
+    display: flex;
+    align-items: center;
+}
+
+.navbarButton{
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.navbarButton a{
     cursor: pointer;
 }
