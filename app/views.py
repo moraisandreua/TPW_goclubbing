@@ -1,9 +1,11 @@
 from django.shortcuts import render
 import folium
 
+
 # Create your views here.
 def index(request):
     return render(request, "index.html", {})
+
 
 def search(request):
     f = folium.Figure(width=1000, height=1000)
@@ -18,6 +20,7 @@ def search(request):
     context = {'my_map': m}
 
     return render(request, 'search.html', context)
+
 
 def searchName(request, id):
     f = folium.Figure(width=1000, height=1000)
