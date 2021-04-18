@@ -36,3 +36,15 @@ def searchName(request, id):
     return render(request, 'search.html', context)
 
 
+def dashboard(request):
+    return render(request, "dashboard.html")
+
+
+def dashboard_profile(request):
+    return render(request, "dash_profile.html")
+
+
+def dashboard_home(request):
+    return render(request, "dash_home.html")
+
+

@@ -1,0 +1,62 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/dashboard.css" %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        @font-face {
+            font-family: Biko;
+            src: url("http://127.0.0.1:8000/static/font/Biko_Regular.woff");
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: Biko, serif;
+
+        }
+    </style>
+
+</head>
+<body>
+    <div class="grid-container">
+      <div class="header">
+          <h1>DashBoard</h1>
+      </div>
+      <aside class="sidenav">
+          <div class="nav-top-section">
+              <div class="container_logo_title">
+                  <img src="{% static "img/logo.png" %}"/>
+                  <!--<h1>DashBoard</h1>-->
+              </div>
+          </div>
+          <div class="menus">
+              <ul class="menus-items">
+                  <a href={% url 'dashboard_home' %}><li class="item">Home</li></a>
+                  <a><li class="item">Events</li></a>
+                  <a><li class="item">AD's</li></a>
+                  <a><li class="item">Comments</li></a>
+                  <a href={% url 'dashboard_profile' %}>
+                      <li class="item">Profile</li>
+
+                  </a>
+              </ul>
+          </div>
+          <div class="nav-bottom-section">
+            <ul class="bottom-menu">
+                <li class="exit">Exit</li>
+            </ul>
+          </div>
+      </aside>
+      <main class="main">
+          {% block content %}
+          {% endblock %}
+      </main>
+    </div>
+
+
+</body>
+</html>

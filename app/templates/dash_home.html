@@ -1,0 +1,59 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block content %}
+<div class="home-container">
+    <div class="home-title">
+        <h1>Home</h1>
+    </div>
+    <div class="events">
+        <div class="title">
+            <h1>Events</h1>
+        </div>
+        <div class="events-content">
+            <div class="event"></div>
+            <div class="event"></div>
+            <div class="event"></div>
+            <div class="event"></div>
+            <div class="event"></div>
+            <div class="event"></div>
+            <div class="event"></div>
+            <div class="event"></div>
+        </div>
+        <img id="background-image" src="{% static "img/DashBoardFundo.png" %}"/>
+    </div>
+    <div class="pubs">
+        <div class="title">
+            <h1>AD´s</h1>
+        </div>
+        <div class="pubs-content">
+            <div class="pub"></div>
+            <div class="pub"></div>
+            <div class="pub"></div>
+            <div class="pub"></div>
+            <div class="pub"></div>
+            <div class="pub"></div>
+            <div class="pub"></div>
+        </div>
+        <img id="background-image" src="{% static "img/DashBoardFundo3.png" %}"/>
+    </div>
+    <div class="profile">
+        <div class="title">
+            <h1>Profile</h1>
+        </div>
+        <div class="profile-content">
+
+        </div>
+    </div>
+    <div class="comments">
+        <div class="title">
+            <h1>Comments</h1>
+        </div>
+        <div class="comments-content">
+
+        </div>
+        <img id="background-image" src="{% static "img/DashBoardFundo2.png" %}"/>
+    </div>
+
+</div>
+{% endblock %}

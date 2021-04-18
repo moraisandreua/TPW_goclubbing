@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app.views import index, search, searchName
+from app.views import index, search, searchName,dashboard, dashboard_profile, dashboard_home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('search/', search),
     path('search/<str:id>', searchName),
+    path('dashboard', dashboard, name='dashboard'),
+    path('dashboard/profile', dashboard_profile, name='dashboard_profile'),
+    path('dashboard/home', dashboard_home, name="dashboard_home")
 ]
