@@ -8,7 +8,7 @@ class Business(models.Model):
     location = models.CharField(max_length=100)
     type = models.CharField(max_length=50)
     company_name = models.CharField(max_length=100)
-    opening_hours = models.JSONField()
+    opening_hours = models.JSONField(null=True)
     contact_email = models.EmailField(max_length=100)
     contact_phone = models.IntegerField()
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -20,7 +20,6 @@ class Business(models.Model):
 class BusinessPhoto(models.Model):
     path = models.FileField(upload_to="business_photos/")
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
-
 
 
 class Event(models.Model):
@@ -41,9 +40,6 @@ class Event(models.Model):
 class EventPhoto(models.Model):
     path = models.FileField(upload_to="event_photos/")
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.path.split("/")[-1]
 
 
 class Comment(models.Model):
