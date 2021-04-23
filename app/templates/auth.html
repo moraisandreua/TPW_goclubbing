@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static "css/index.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/auth.css" %}">
+    <title>Title</title>
+    <style>
+        @font-face {
+            src: url("../static/font/Biko_Regular.ttf");
+            font-family: Biko;
+        }
+
+        *{
+            box-sizing: border-box;
+            font-family: Biko;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbarLogo"><img src="{% static "img/logo.png" %}"/></div>
+        <div></div>
+        <div class="navbarButton"><a>Registar estabelecimento</a></div>
+    </div>
+    <div class="container">
+        <form action="." method="post" class="form-horizontal">
+            {% csrf_token %}
+            <div class="form-group-login">
+                {{ form.username.label_tag }}<br>
+                {{ form.username }}
+            </div>
+            <div class="form-group-login">
+                {{ form.password.label_tag }}<br>
+                {{ form.password }}
+            </div>
+            <button class="findButton" type="submit">Find events</button>
+        </form>
+    </div>
+</body>
+</html>

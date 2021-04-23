@@ -6,6 +6,8 @@ import folium
 def index(request):
     return render(request, "index.html", {})
 
+def register(request):
+    return render(request, "auth.html", {})
 
 def search(request):
     f = folium.Figure(width=1000, height=1000)

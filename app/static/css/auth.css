@@ -1,0 +1,20 @@
+.form-group-login{
+    padding: 10px;
+}
+
+.form-group-login label{
+    margin-bottom: 5px;
+    font-size: 15pt;
+}
+
+.form-group-login input{
+    padding: 10px;
+    font-size: 13pt;
+    width: 400px;
+}
+
+.findButton{
+    margin-left: 10px;
+    font-size: 12pt;
+    width: 400px;
+}
