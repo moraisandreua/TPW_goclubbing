@@ -22,20 +22,66 @@
     <div class="navbar">
         <div class="navbarLogo"><img src="{% static "img/logo.png" %}"/></div>
         <div></div>
-        <div class="navbarButton"><a>Registar estabelecimento</a></div>
+        <div class="navbarButton">{% if auth_signup %} <a href="/login">Login</a> {% else %} <a href="/signup">Registar estabelecimento</a> {% endif %}</div>
     </div>
     <div class="container">
         <form action="." method="post" class="form-horizontal">
             {% csrf_token %}
-            <div class="form-group-login">
-                {{ form.username.label_tag }}<br>
-                {{ form.username }}
-            </div>
-            <div class="form-group-login">
-                {{ form.password.label_tag }}<br>
-                {{ form.password }}
-            </div>
-            <button class="findButton" type="submit">Find events</button>
+            {% if message %}
+                <div class="message_{{ message.type }}">{{ message.body }}</div>
+            {% endif %}
+            {% if not auth_signup %}
+                <div class="form-group-login">
+                    {{ form.username.label_tag }}<br>
+                    {{ form.username }}
+                </div>
+                <div class="form-group-login">
+                    {{ form.password.label_tag }}<br>
+                    {{ form.password }}
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="form-group-login">
+                    {{ form.name.label_tag }}<br>
+                    {{ form.name }}
+                    </div>
+                    <div class="form-group-login">
+                        {{ form.location.label_tag }}<br>
+                        {{ form.location }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group-login">
+                        {{ form.type.label_tag }}<br>
+                        {{ form.type }}
+                    </div>
+                    <div class="form-group-login">
+                        {{ form.company.label_tag }}<br>
+                        {{ form.company }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group-login">
+                        {{ form.email.label_tag }}<br>
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group-login">
+                        {{ form.phone.label_tag }}<br>
+                        {{ form.phone }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group-login">
+                        {{ form.username.label_tag }}<br>
+                        {{ form.username }}
+                    </div>
+                    <div class="form-group-login">
+                        {{ form.password.label_tag }}<br>
+                        {{ form.password }}
+                    </div>
+                </div>
+            {% endif %}
+            <button class="findButton" type="submit">{% if auth_signup %} Signup {% else %} Entrar {% endif %}</button>
         </form>
     </div>
 </body>
