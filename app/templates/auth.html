@@ -84,5 +84,16 @@
             <button class="findButton" type="submit">{% if auth_signup %} Signup {% else %} Entrar {% endif %}</button>
         </form>
     </div>
+    <script>
+        {% if auth_signup %}
+
+
+            document.getElementsByClassName("message_error").style.width="820";
+            document.getElementsByClassName("message_success").style.width="820";
+        {% else %}
+            document.getElementsByClassName("message_error").style.width="400";
+            document.getElementsByClassName("message_success").style.width="400";
+        {% endif %}
+    </script>
 </body>
 </html>

@@ -23,3 +23,19 @@
     width: 100%;
     display: flex;
 }
+
+.message_error, .message_success{
+    padding:10px;
+    margin-left: 10px;
+}
+
+.message_success{
+    background-color: #427e27;
+    border: 1px solid #61b34e;
+}
+
+.message_error{
+    background-color: #ae2323;
+    border: 1px solid #f31717;
+    color: #8f8f8f;
+}

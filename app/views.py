@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from app.forms import Register
 from django.contrib.auth.models import User
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.forms import AuthenticationForm
+from app.models import Business
+from django.shortcuts import redirect
+
 import folium
 
 
@@ -13,13 +18,19 @@ def register(request):
         form = Register(request.POST)
 
         if form.is_valid():
-            user = User.objects.create_user(username=form.username, password=form.password, email=form.email)
-            user.save()
-            return render(request, "auth.html", {'message':{'type':"success", 'body':'Utilizador criado com sucesso.'}})
+            try:
+                user = User.objects.create_user(username=form.cleaned_data["username"], password=form.cleaned_data["password"], email=form.cleaned_data["email"])
+                business = Business(name=form.cleaned_data["name"], location=form.cleaned_data["location"], type=form.cleaned_data["type"], company_name=form.cleaned_data["company"], contact_email=form.cleaned_data["email"], contact_phone=form.cleaned_data["phone"], user=user)
+                user.save()
+                business.save()
+            except:
+                return render(request, "auth.html", {'auth_signup':True, 'form':form, 'message': {'type': "error", 'body': 'Utilizador já existe!'}})
+
+            return redirect('/login', message={'type': "success", 'body': 'Utilizador criado com sucesso!'})
     else:
         form = Register()
 
-    return render(request, "auth.html", {'auth_signup':True, 'form':form, 'message':{'type':"success", 'body':'Utilizador criado com sucesso.'}})
+    return render(request, "auth.html", {'auth_signup':True, 'form':form})
 
 def search(request):
     f = folium.Figure(width=1000, height=1000)
