@@ -2,7 +2,13 @@ from django.shortcuts import render, redirect
 from app.models import Event, Business, Advertisement, Comment
 from django.contrib.auth.models import User
 from app.forms import EditProfileForm, AddEventForm, EditEventForm, AddAdvertForm, EditAdvertForm, Register
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.forms import AuthenticationForm
+from app.models import Business
+from django.shortcuts import redirect
+
 import folium
+import geocoder
 
 
 # Create your views here.
@@ -15,16 +21,23 @@ def register(request):
         form = Register(request.POST)
 
         if form.is_valid():
-            user = User.objects.create_user(username=form.username, password=form.password, email=form.email)
-            user.save()
-            return render(request, "auth.html", {'message': {'type': "success", 'body': 'Utilizador criado com sucesso.'}})
+            try:
+                user = User.objects.create_user(username=form.cleaned_data["username"], password=form.cleaned_data["password"], email=form.cleaned_data["email"])
+                business = Business(name=form.cleaned_data["name"], location=form.cleaned_data["location"], type=form.cleaned_data["type"], company_name=form.cleaned_data["company"], contact_email=form.cleaned_data["email"], contact_phone=form.cleaned_data["phone"], user=user)
+                user.save()
+                business.save()
+            except:
+                return render(request, "auth.html", {'auth_signup':True, 'form':form, 'message': {'type': "error", 'body': 'Utilizador já existe!'}})
+
+            return redirect('/login', message={'type': "success", 'body': 'Utilizador criado com sucesso!'})
     else:
         form = Register()
 
-    return render(request, "auth.html", {'auth_signup': True, 'form': form, 'message': {'type': "success", 'body':'Utilizador criado com sucesso.'}})
-
+    return render(request, "auth.html", {'auth_signup':True, 'form':form})
 
 def search(request):
+    api_key = '0p7iGyKlT41Pu8b0SQsqxGDpTDNLoQNu'
+
     f = folium.Figure(width=1000, height=1000)
     m = folium.Map([41.120736, -8.611354], zoom_start=25).add_to(f)
     folium.TileLayer('cartodbpositron').add_to(m)
@@ -33,6 +46,17 @@ def search(request):
     popup = folium.Popup(pp, max_width=2650)
     folium.Marker(location=[41.120736, -8.611354], popup=popup).add_to(m)
     # depois aqui coloca-se os vários markers da base de dados
+
+    businesses = Business.objects.all()
+    for business in businesses:
+        if business.lat is None or business.lng is None:
+            geo = geocoder.mapquest(business.location, key=api_key)
+            latlng = geo.latlng
+            business.lat = latlng[0]
+            business.lng = latlng[1]
+            business.save()
+        folium.Marker(location=[business.lat, business.lng]).add_to(m)
+
     m = m._repr_html_()
     context = {'my_map': m}
 
