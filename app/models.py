@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 class Business(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
+    lat = models.FloatField(null=True, blank=True)
+    lng = models.FloatField(null=True, blank=True)
     type = models.CharField(max_length=50)
     company_name = models.CharField(max_length=100)
     opening_hours = models.JSONField(null=True)

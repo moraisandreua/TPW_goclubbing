@@ -7,6 +7,7 @@ from app.models import Business
 from django.shortcuts import redirect
 
 import folium
+import geocoder
 
 
 # Create your views here.
@@ -33,6 +34,8 @@ def register(request):
     return render(request, "auth.html", {'auth_signup':True, 'form':form})
 
 def search(request):
+    api_key = '0p7iGyKlT41Pu8b0SQsqxGDpTDNLoQNu'
+
     f = folium.Figure(width=1000, height=1000)
     m = folium.Map([41.120736, -8.611354], zoom_start=25).add_to(f)
     folium.TileLayer('cartodbpositron').add_to(m)
@@ -41,6 +44,17 @@ def search(request):
     popup = folium.Popup(pp, max_width=2650)
     folium.Marker(location=[41.120736, -8.611354], popup=popup).add_to(m)
     # depois aqui coloca-se os vários markers da base de dados
+
+    businesses = Business.objects.all()
+    for business in businesses:
+        if business.lat is None or business.lng is None:
+            geo = geocoder.mapquest(business.location, key=api_key)
+            latlng = geo.latlng
+            business.lat = latlng[0]
+            business.lng = latlng[1]
+            business.save()
+        folium.Marker(location=[business.lat, business.lng]).add_to(m)
+
     m = m._repr_html_()
     context = {'my_map': m}
 

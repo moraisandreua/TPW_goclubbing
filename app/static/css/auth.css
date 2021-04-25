@@ -14,9 +14,11 @@
 }
 
 .findButton{
-    margin-left: 10px;
     font-size: 12pt;
-    width: 400px;
+    width: 100%;
+    height: 8vh;
+    border-radius: 20px;
+    margin-top: 2vh;
 }
 
 .row{
@@ -38,4 +40,14 @@
     background-color: #ae2323;
     border: 1px solid #f31717;
     color: #8f8f8f;
+}
+
+.form-horizontal {
+    position: absolute;
+    top: 20vh;
+    left: 5vh;
+}
+
+.navbar {
+    box-shadow:0px 4px 3px #d3d3d3;;
 }
