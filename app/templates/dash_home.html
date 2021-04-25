@@ -13,6 +13,7 @@
         </div>
         <div class="events-content">
             {% for event in events %}
+                {% if event.business.name == self.name %}
             <div class="pub">
                 <div>
                     <p class="fa" style="font-weight: bold">{{ event.name }}</p>
@@ -22,6 +23,7 @@
                     <p style="text-align: center"><i class="fa fa-check"></i>278</p>
                 </div>
             </div>
+                {% endif %}
             {% endfor %}
 
         </div>
@@ -34,6 +36,7 @@
         </div>
         <div class="pubs-content">
             {% for ad in ads %}
+                {% if ad.event.business == self %}
             <div class="pub">
                 <div>
                     <p class="fa" style="font-weight: bold">{{ ad.event }} Add</p>
@@ -43,6 +46,7 @@
                     <p style="text-align: center"><i class="fa fa-heart"></i> 278</p>
                 </div>
             </div>
+                {% endif %}
             {% endfor %}
         </div>
         <img id="background-image" src="{% static "img/DashBoardFundo3.png" %}"/>
@@ -66,11 +70,13 @@
         </div>
         <div class="comments-content">
             {% for comment in comments %}
+                {% if comment.event.business == self %}
             <div class="comment">
-                    <p class="fa" style="font-weight: bold">Comment in {{ comment.event }} <a href={% url 'dashboard_event' num=1 %}><i style="color:black;" class="fa fa-trash"></i></a></p>
+                    <p class="fa" style="font-weight: bold">Comment in {{ comment.event }} <a href={% url 'dashboard_delete' num=1 %}><i style="color:black;" class="fa fa-trash"></i></a></p>
                     <p class="grey">{{ comment.classification }}</p>
                     <p class="grey">{{ comment.body|truncatewords:50 }}</p>
             </div>
+                {% endif %}
             {% endfor %}
         </div>
         <img id="background-image" src="{% static "img/DashBoardFundo2.png" %}"/>

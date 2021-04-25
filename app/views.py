@@ -152,3 +152,29 @@ def dashboard_profile(request):
         current_account = Business.objects.get(user_id=request.user.id)
         form = EditProfileForm(initial={'name': current_account.name, 'location': current_account.location, 'type': current_account.type, 'company_name':current_account.company_name, 'contact_phone':current_account.contact_phone, 'contact_email':current_account.contact_email, 'opening_hours':current_account.opening_hours})
     return render(request, "dash_profile.html", {'form': form})
+
+
+def dashboard_my_events(request):
+    events = Event.objects.all()
+    business = Business.objects.get(user_id=request.user.id)
+    tparams = {'events': events, 'self': business}
+    return render(request, "see_events.html", tparams)
+
+
+def dashboard_my_ads(request):
+    ads = Advertisement.objects.all()
+    business = Business.objects.get(user_id=request.user.id)
+    tparams = {'ads': ads, 'self': business}
+    return render(request, "see_ads.html", tparams)
+
+
+def dashboard_my_comments(request):
+    comments = Comment.objects.all()
+    business = Business.objects.get(user_id=request.user.id)
+    tparams = {'comments': comments, 'self': business}
+    return render(request, "see_comments.html", tparams)
+    return None
+
+
+def dashboard_delete(request, num):
+    return None

@@ -437,3 +437,20 @@ html, body {
     background-color: white;
     color: #194350 !important;
 }
+/*------------LISTINGS--------------*/
+.my-list{
+    margin: 5%;
+}
+
+.list-group-item{
+    padding: 5%;
+}
+
+.edit-list{
+    color: black;
+    margin: 0% 2%;
+}
+.black{
+    float: right;
+    color: black;
+}

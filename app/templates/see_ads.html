@@ -1,0 +1,16 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% block content %}
+<div>
+    <div>
+        <h4 class="form-title" style="color:#000; margin-top: 4%;">My Events</h4>
+    </div>
+    <ul class="list-group list-group-flush my-list">
+        {% for ad in ads %}
+            {% if ad.event.business == self %}
+        <li class="list-group-item">Ad for {{ ad.event}}<a ><i class="fa fa-trash black"></i></a><a href={% url 'dashboard_ad' num=ad.id %}><i style="float: right" class="fa fa-pencil edit-list"></i></a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

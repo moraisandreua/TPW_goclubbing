@@ -40,10 +40,11 @@
           <div class="menus">
               <ul class="menus-items">
                   <a href={% url 'dashboard_home' %}><li class="item">Home</li></a>
-                  <a><li class="item">Comments</li></a>
+                  <a href={% url 'dashboard_my_events' %}><li class="item">Events</li></a>
+                  <a href={% url 'dashboard_my_ads' %}><li class="item">Advertisements</li></a>
+                  <a href={% url 'dashboard_my_comments' %}><li class="item">Comments</li></a>
                   <a href={% url 'dashboard_profile' %}>
                       <li class="item">Profile</li>
-
                   </a>
               </ul>
           </div>
