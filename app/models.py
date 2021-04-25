@@ -21,12 +21,17 @@ class BusinessPhoto(models.Model):
     path = models.FileField(upload_to="business_photos/")
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
 
+class Event_Type(models.Model):
+    name=models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
 
 class Event(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     datetime = models.DateTimeField(auto_now=False, auto_now_add=False)
-    type = models.CharField(max_length=100)
+    type = models.ForeignKey(Event_Type, on_delete=models.CASCADE)
     theme = models.CharField(max_length=100)
     min_age = models.IntegerField()
     organization = models.CharField(max_length=100)
@@ -35,7 +40,6 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
-
 
 class EventPhoto(models.Model):
     path = models.FileField(upload_to="event_photos/")
@@ -49,6 +53,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.body.strip(".")[0]  # First sentence is returned
+
+class Advertisement(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    date=models.DateTimeField()
+    expire=models.DateTimeField()
+    body=models.CharField(max_length=100)
 
 """
 

@@ -18,3 +18,8 @@
     font-size: 12pt;
     width: 400px;
 }
+
+.row{
+    width: 100%;
+    display: flex;
+}

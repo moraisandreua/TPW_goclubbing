@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from app.models import Event, Business
+from django.contrib.auth.models import User
+from app.forms import EditProfileForm, EditEventForm, Register
 import folium
-from app.forms import EditProfileForm, EditEventForm
 
 
 # Create your views here.
@@ -9,7 +10,17 @@ def index(request):
     return render(request, "index.html", {})
 
 def register(request):
-    return render(request, "auth.html", {})
+    if request.method == 'POST':
+        form = Register(request.POST)
+
+        if form.is_valid():
+            user = User.objects.create_user(username=form.username, password=form.password, email=form.email)
+            user.save()
+            return render(request, "auth.html", {'message':{'type':"success", 'body':'Utilizador criado com sucesso.'}})
+    else:
+        form = Register()
+
+    return render(request, "auth.html", {'auth_signup':True, 'form':form, 'message':{'type':"success", 'body':'Utilizador criado com sucesso.'}})
 
 def search(request):
     f = folium.Figure(width=1000, height=1000)
