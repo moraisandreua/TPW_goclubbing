@@ -245,7 +245,7 @@ html, body {
 
 .pub {
     height: 90%;
-    width: 10vw;
+    width: fit-content;
     background-color: #FFC2B4;
     display: inline-block;
     margin-left: 1vw;
@@ -290,13 +290,8 @@ html, body {
     border-radius: 20px;
 }
 
-.pub {
-    height: 90%;
-    width: 10vw;
-    background-color: #FFC2B4;
-    display: inline-block;
-    margin-left: 1vw;
-    border-radius: 20px;
+.prof-text{
+    margin: 5%;
 }
 
 .comments {
@@ -339,6 +334,14 @@ html, body {
     margin-left: 1vw;
     margin-bottom: 1vw;
     border-radius: 20px;
+    padding: -50%;
+}
+
+.comment-title{
+}
+
+.comment-classif{
+    margin: -10%;
 }
 
 .title {
@@ -374,7 +377,13 @@ html, body {
     border: none;
     text-align: right;
 }
-
+.grey{
+    color: #696969;
+}
+.mysmalls{
+    margin: 20px !important;
+    font-size: 2em !important;
+}
 /*------------PROFILE--------------*/
 
 #formus{

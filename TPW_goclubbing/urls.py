@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
-from app.views import index, search, searchName, dashboard_profile, dashboard_home, dashboard_event, register
+from app.views import index, search, searchName, dashboard_profile, dashboard_home, dashboard_newevent, dashboard_event, dashboard_newad, dashboard_ad, register
 
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='auth.html'), name='login'),
@@ -28,5 +28,8 @@ urlpatterns = [
     path('search/<str:id>', searchName),
     path('dashboard/', dashboard_home, name='dashboard_home'),
     path('dashboard/profile', dashboard_profile, name='dashboard_profile'),
+    path('dashboard/newevent', dashboard_newevent, name='dashboard_newevent'),
     path('dashboard/event/<int:num>', dashboard_event, name='dashboard_event'),
+    path('dashboard/newad', dashboard_newad, name='dashboard_newad'),
+    path('dashboard/ad/<int:num>', dashboard_ad, name='dashboard_ad'),
 ]

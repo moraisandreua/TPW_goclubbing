@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static "css/index.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/auth.css" %}">
-    <title>Title</title>
+    <title>Log In</title>
     <style>
         @font-face {
             src: url("../static/font/Biko_Regular.ttf");
@@ -22,7 +22,7 @@
     <div class="navbar">
         <div class="navbarLogo"><img src="{% static "img/logo.png" %}"/></div>
         <div></div>
-        <div class="navbarButton">{% if auth_signup %} <a href="/login">Login</a> {% else %} <a href="/signup">Registar estabelecimento</a> {% endif %}</div>
+        <div class="navbarButton">{% if auth_signup %} <a href="/login">Login</a> {% else %} <a href="/signup">Register my business</a> {% endif %}</div>
     </div>
     <div class="container">
         <form action="." method="post" class="form-horizontal">
@@ -81,7 +81,7 @@
                     </div>
                 </div>
             {% endif %}
-            <button class="findButton" type="submit">{% if auth_signup %} Signup {% else %} Entrar {% endif %}</button>
+            <button class="findButton" type="submit">{% if auth_signup %} Signup {% else %} Enter {% endif %}</button>
         </form>
     </div>
 </body>

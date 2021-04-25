@@ -4,7 +4,7 @@
     <div id="formus">
         <form action="." method="post">
             {% csrf_token %}
-            <h4 class="form-title">Edit Event</h4>
+            <h4 class="form-title">Add Event</h4>
             <div class="form-group">
                 {{ form.name.label_tag }}
                 {{ form.name }}
@@ -31,11 +31,6 @@
             <div class="form-group">
                 {{ form.dress_code.label_tag }}
                 {{ form.dress_code }}
-
-            </div>
-                {{ event }}
-            <div class="form-group col-md-offset-2 col-md-10">
-                <a type="delete" value="Delete" class="btn btn-default" href="{% url 'dashboard_home'  %}">Delete</a>
             </div>
 
             <div class="form-group col-md-offset-2 col-md-10">
