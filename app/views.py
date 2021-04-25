@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from app.models import Event, Business
 import folium
+from app.forms import EditProfileForm, EditEventForm
 
 
 # Create your views here.
@@ -33,20 +35,40 @@ def searchName(request, id):
     folium.Marker(location=[41.120736, -8.611354], popup=popup).add_to(m)
     # depois aqui coloca-se os vários markers da base de dados
     m = m._repr_html_()
-    context = {'my_map': m, 'name':id}
+    context = {'my_map': m, 'name': id}
 
     return render(request, 'search.html', context)
 
 
-def dashboard(request):
-    return render(request, "dashboard.html")
-
-
-def dashboard_profile(request):
-    return render(request, "dash_profile.html")
-
-
 def dashboard_home(request):
+    events = Event.objects.all()
+    tparams = {'events': events}
     return render(request, "dash_home.html")
 
 
+def dashboard_event(request, num):
+    if request.method == 'POST':
+        form = EditEventForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            return redirect(request, "dash_home.html")
+        else:
+            event = Event.objects.get(id=num)
+            form = EditProfileForm(initial={'name': event.name, 'location': event.location, 'datetime': event.datetime, 'type': event.type,'theme': event.theme, 'min_age': event.min_age, 'organization': event.organization, 'dress_code': event.dress_code})
+            return render(request, "dash_event.html", {'form': form, 'error': True})
+    else:
+        event = Event.objects.get(id=num)
+        form = EditProfileForm(initial={'name': event.name, 'location': event.location, 'datetime': event.datetime, 'type': event.type, 'theme':event.theme, 'min_age':event.min_age, 'organization':event.organization, 'dress_code':event.dress_code})
+    return render(request, "dash_event.html", {'form': form, 'error': False})
+
+
+def dashboard_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            return render(request, "dash_home.html")
+    else:
+        current_account = Business.objects.get(id=1)    #substituir por current user
+        form = EditProfileForm(initial={'name': current_account.name, 'location': current_account.location, 'type': current_account.type, 'company_name':current_account.company_name, 'contact_phone':current_account.contact_phone, 'contact_email':current_account.contact_email, 'opening_hours':current_account.opening_hours})
+    return render(request, "dash_profile.html", {'form': form})

@@ -11,20 +11,25 @@
             <h1>Events</h1>
         </div>
         <div class="events-content">
-            <div class="event"></div>
-            <div class="event"></div>
-            <div class="event"></div>
-            <div class="event"></div>
-            <div class="event"></div>
-            <div class="event"></div>
-            <div class="event"></div>
-            <div class="event"></div>
+            <div class="pub">
+                <div>
+                    <p class="fa">Event Number 1</p>
+                    <a href={% url 'dashboard_event' num=1 %}><i class="fa fa-pencil"></i></a>
+                </div>
+                <span></span>
+            </div>
+            <div class="pub"></div>
+            <div class="pub"></div>
+            <div class="pub"></div>
+            <div class="pub"></div>
+            <div class="pub"></div>
+            <div class="pub"></div>
         </div>
         <img id="background-image" src="{% static "img/DashBoardFundo.png" %}"/>
     </div>
     <div class="pubs">
         <div class="title">
-            <h1>AD´s</h1>
+            <h1>Ads</h1>
         </div>
         <div class="pubs-content">
             <div class="pub"></div>
@@ -37,12 +42,13 @@
         </div>
         <img id="background-image" src="{% static "img/DashBoardFundo3.png" %}"/>
     </div>
-    <div class="profile">
+    <div class="profiles">
         <div class="title">
-            <h1>Profile</h1>
+            <h1 style="display: inline-block">Profile</h1>
+            <a class="edit-button" href={% url 'dashboard_profile' %}><i class="fa fa-pencil"></i></a>
         </div>
         <div class="profile-content">
-
+            <div class="profile"></div>
         </div>
     </div>
     <div class="comments">
@@ -50,7 +56,13 @@
             <h1>Comments</h1>
         </div>
         <div class="comments-content">
-
+            <div class="comment"></div>
+            <div class="comment"></div>
+            <div class="comment"></div>
+            <div class="comment"></div>
+            <div class="comment"></div>
+            <div class="comment"></div>
+            <div class="comment"></div>
         </div>
         <img id="background-image" src="{% static "img/DashBoardFundo2.png" %}"/>
     </div>

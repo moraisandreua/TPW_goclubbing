@@ -2,7 +2,7 @@ html, body {
     margin: 0;
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    overflow: auto;
 }
 .grid-container {
   display: grid;
@@ -44,9 +44,8 @@ html, body {
         "title"
         "menus"
         "rest";
-    /*background-color: #919090;*/
     background-color: #9DBEB9;
-    height: 100vh;
+    height: auto;
     width: 100%;
     box-shadow: 5px 0px 10px #d3d3d3;
 }
@@ -54,7 +53,7 @@ html, body {
 .nav-top-section {
     background-color: white;
     border-radius: 20px;
-    margin: 1vw;
+    margin: 1vw 1vh 5vh 1.9vh;
     height: 5vw;
     width: 13vw;
 }
@@ -71,24 +70,12 @@ html, body {
     height: 5vw;
 }
 
-/*
-.container_logo_title h1 {
-    padding: 0px;
-    font-size: 1.6vw;
-    top: -0.6vw;
-    left: 3.4vw;
-    position: absolute;
-    color: black;
-    font-weight: bold;
-}*/
-
 .item {
-    /*padding: 15px 15px 15px 30px;*/
     padding: 1vw 1vw 1vw 1vw;
     color: black;
     font-size: 1.3vw;
     background-color: white;
-    margin: 0px 20px 10px;
+    margin: 3vh 2vw 0vh;
     border-radius: 10px;
     box-shadow: 5px 5px 0px #d3d3d3;
 }
@@ -107,11 +94,10 @@ html, body {
 .bottom-menu {
     list-style-type: none;
     padding: 0px;
-    margin-top: 110px;
+    margin-bottom: 8%;
 }
 
 .exit {
-    /*padding: 15px 15px 15px 30px;*/
     padding: 1vw 1vw 1vw 2vw;
     color: white;
     font-size: 1.3vw;
@@ -258,15 +244,16 @@ html, body {
 }
 
 .pub {
-    height: 95%;
+    height: 90%;
     width: 10vw;
     background-color: #FFC2B4;
     display: inline-block;
     margin-left: 1vw;
     border-radius: 20px;
+    padding: 3% 3% 3% 3%;
 }
 
-.profile {
+.profiles {
     grid-area: profile;
     display: grid;
     grid-template-rows: 1fr 3fr;
@@ -274,6 +261,42 @@ html, body {
     grid-template-areas:
     "title"
     "content";
+}
+
+.profiles > title{
+    font-size: 1vw;
+}
+
+.profile-content{
+    display: inline-block;
+    white-space: nowrap;
+    position: relative;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    height: 100%;
+    width: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.profile{
+    height: 90%;
+    width: 37vw;
+    background-color: #FFC2B4;
+    display: inline-block;
+    margin-left: 1vw;
+    border-radius: 20px;
+}
+
+.pub {
+    height: 90%;
+    width: 10vw;
+    background-color: #FFC2B4;
+    display: inline-block;
+    margin-left: 1vw;
+    border-radius: 20px;
 }
 
 .comments {
@@ -290,12 +313,47 @@ html, body {
     font-size: 1vw;
 }
 
+.comments-content{
+    display: grid;
+    white-space: pre-wrap;
+    position: relative;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    height: 100%;
+    width: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.comments-content::-webkit-scrollbar {
+    display: none;
+}
+
+.comment{
+    height: 7vw;
+    width: 37vw;
+    background-color: #FFC2B4;
+    display: inline-block;
+    margin-left: 1vw;
+    margin-bottom: 1vw;
+    border-radius: 20px;
+}
+
 .title {
     grid-area: title;
     margin-left: 2vw;
     color: white;
-    display: grid;
+    display: inline;
 }
+
+.fa-pencil{
+    color: white;
+    margin-top: 2%;
+    text-align: right;
+}
+
 
 #background-image {
     height: 100%;
@@ -307,3 +365,66 @@ html, body {
     transform: scaleX(-1);
 }
 
+.exit-btn{
+    color: wheat !important;
+    text-decoration: none;
+}
+.edit-button{
+    background-color: transparent;
+    border: none;
+    text-align: right;
+}
+
+/*------------PROFILE--------------*/
+
+#formus{
+    background-color: rgba(0,68,82,0.9);
+    border-radius: 1%;
+    height: fit-content;
+    width: 70%;
+    margin: 5% auto;
+    padding: 2%;
+    color: white;
+}
+.form-title{
+    margin-bottom: 5%;
+}
+.form-title, #formus label{
+    color: white;
+    z-index: 2;
+    text-align: center;
+}
+.form-group{
+    margin-bottom: 3%;
+}
+.hours label{
+    width: 11vw !important;
+    margin-bottom: 2%;
+
+}
+.hoursdiv textarea{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50vw !important;
+
+}
+#formus label{
+    border: #a22db0;
+    width: 7vw;
+}
+#formus input{
+    padding: 0.7%;
+    width: 20vw;
+}
+.btn{
+    border-radius: 8px !important;
+    border-color: white !important;
+    color: white !important;
+    width: 10vw !important;
+    font-weight: bold!important;
+}
+.btn:hover{
+    background-color: white;
+    color: #194350 !important;
+}
