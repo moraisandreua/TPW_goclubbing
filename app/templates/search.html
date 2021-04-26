@@ -71,21 +71,10 @@
 
     </div>
     <div class="container" id="mapdiv">
-        <div id="modal" class="modal">
-            <div class="info">
-                <div class="infoPic">
-                    <img src="{% static "img/logo_test.png" %}"/>
-                </div>
-                <div class="infoText">
-                    <div class="infoTextName">Bar do Fred</div>
-                    <div class="infoTextName">Bar</div>
-                </div>
-            </div>
-            <div class="modalImages">
-                <img src="{% static "img/exemplo_img.jpeg" %}"/>
-            </div>
-            <div></div>
-        </div>
-        {% include "map.html" %}
+        <div class="map">{% include "map.html" %}</div>
+        {% block sideCard %}
+
+
+        {% endblock %}
     </div>
 </body>

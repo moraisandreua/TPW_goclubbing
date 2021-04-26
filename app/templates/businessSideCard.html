@@ -1,0 +1,22 @@
+{% extends "search.html" %}
+
+{% block sideCard %}
+
+    <div id="modal" class="modal">
+        <div class="info">
+            <div class="infoPic">
+            </div>
+            <div class="infoText">
+                <div class="infoTextName">{{ businessName }}</div>
+                <div class="infoTextName">{{ businessType }}</div>
+            </div>
+        </div>
+        <div class="modalImages">
+            {% for image in businessPhotos %}
+                <img src="{{ image }}"/>
+            {% endfor %}
+        </div>
+        <div></div>
+    </div>
+
+{% endblock %}

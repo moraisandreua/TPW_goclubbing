@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from app.forms import EditProfileForm, AddEventForm, EditEventForm, AddAdvertForm, EditAdvertForm, Register
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
-from app.models import Business
+from app.models import Business, BusinessPhoto, Event
 from django.shortcuts import redirect
 
 import folium
@@ -35,16 +35,26 @@ def register(request):
 
     return render(request, "auth.html", {'auth_signup':True, 'form':form})
 
+
 def search(request):
+
     api_key = '0p7iGyKlT41Pu8b0SQsqxGDpTDNLoQNu'
 
+    query = request.GET.get('query', False)
+
+    if query:
+        geo = geocoder.mapquest(query, key=api_key)
+        startPoint = geo.latlng
+        zoom_start = 12
+    else:
+        geo = geocoder.mapquest("Portugal", key=api_key)
+        startPoint = geo.latlng
+        zoom_start = 7
+
     f = folium.Figure(width=1000, height=1000)
-    m = folium.Map([41.120736, -8.611354], zoom_start=25).add_to(f)
+    m = folium.Map(startPoint, zoom_start=zoom_start).add_to(f)
     folium.TileLayer('cartodbpositron').add_to(m)
 
-    pp = folium.Html("<a onclick='javascript:parent.myfunction();' style='cursor:pointer;'>Bar do Fred</a>", script=True)
-    popup = folium.Popup(pp, max_width=2650)
-    folium.Marker(location=[41.120736, -8.611354], popup=popup).add_to(m)
     # depois aqui coloca-se os vários markers da base de dados
 
     businesses = Business.objects.all()
@@ -55,7 +65,11 @@ def search(request):
             business.lat = latlng[0]
             business.lng = latlng[1]
             business.save()
-        folium.Marker(location=[business.lat, business.lng]).add_to(m)
+
+        pp = folium.Html("<a href='/search/"+str(business.id)+"' target='_parent'>"+business.name+"</a>",
+                         script=True)
+        popup = folium.Popup(pp, max_width=2650)
+        folium.Marker(location=[business.lat, business.lng], popup=popup).add_to(m)
 
     m = m._repr_html_()
     context = {'my_map': m}
@@ -64,17 +78,51 @@ def search(request):
 
 
 def searchName(request, id):
-    f = folium.Figure(width=1000, height=1000)
-    m = folium.Map([41.120736, -8.611354], zoom_start=25).add_to(f)
-    folium.TileLayer('cartodbpositron').add_to(m)
-    pp = folium.Html('<a id="openmodals" onclick="openModal()">' + 'Bar do Fred' + '</a>', script=True)
-    popup = folium.Popup(pp, max_width=2650)
-    folium.Marker(location=[41.120736, -8.611354], popup=popup).add_to(m)
-    # depois aqui coloca-se os vários markers da base de dados
-    m = m._repr_html_()
-    context = {'my_map': m, 'name': id}
+    business = Business.objects.filter(id=id).get()
 
-    return render(request, 'search.html', context)
+    api_key = '0p7iGyKlT41Pu8b0SQsqxGDpTDNLoQNu'
+
+    f = folium.Figure(width=1000, height=1000)
+    m = folium.Map([business.lat, business.lng], zoom_start=17).add_to(f)
+    folium.TileLayer('cartodbpositron').add_to(m)
+
+    # depois aqui coloca-se os vários markers da base de dados
+
+    businesses = Business.objects.all()
+    for bus in businesses:
+        if bus.lat is None or bus.lng is None:
+            geo = geocoder.mapquest(bus.location, key=api_key)
+            latlng = geo.latlng
+            bus.lat = latlng[0]
+            bus.lng = latlng[1]
+            bus.save()
+
+        pp = folium.Html("<a href='/search/" + str(bus.id) + "' target='_parent'>" + bus.name + "</a>",
+                         script=True)
+        popup = folium.Popup(pp, max_width=2650)
+        folium.Marker(location=[bus.lat, bus.lng], popup=popup).add_to(m)
+
+    m = m._repr_html_()
+
+
+    businessPhoto = BusinessPhoto.objects.filter(business=business)
+    photoUrls = []
+    for photo in businessPhoto:
+        print(photo.path.url)
+        photoUrls.append(photo.path.url)
+    events = Event.objects.filter(business=business)
+    businessType = business.type
+
+
+    context = {
+        'my_map': m,
+        'businessName': business.name,
+        'businessPhoto': photoUrls,
+        'events': events,
+        'businessType': businessType
+    }
+
+    return render(request, 'businessSideCard.html', context)
 
 
 def dashboard_home(request):

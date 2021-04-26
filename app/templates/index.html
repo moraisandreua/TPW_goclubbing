@@ -24,7 +24,10 @@
         <div class="searchBox">
             <h1>Looking for somewhere to go?</h1><br>
             <div class="searchBoxInputContainer">
-                <input type="text" placeholder="Search for Places by name, location..."/><button class="findButton">Find events</button>
+                <form action="{% url 'search' %}" >
+                    {% csrf_token %}
+                    <input type="text" placeholder="Search for Places by name, location..." name="query"/><button type="submit" class="findButton">Find events</button>
+                </form>
             </div>
             <br>
             <a href="/search">See the map</a>
