@@ -50,7 +50,7 @@
           </div>
           <div class="nav-bottom-section bottom-menu">
             <ul class="bottom-menu">
-                <form id="logoutForm" action="/logout" method="get" class="form-inline my-2 my-lg-0">
+                <form id="logoutForm" action="/logout/" method="get" class="form-inline my-2 my-lg-0">
                     {% csrf_token %}
                     <li class="exit"><a class="exit-btn" href="javascript:document.getElementById('logoutForm').submit()">Exit</a></li>
                 </form>
