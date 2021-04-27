@@ -73,7 +73,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'TPW_goclubbing.wsgi.application'
 
-LOGIN_REDIRECT_URL = ('../dashboard/profile')
+LOGIN_REDIRECT_URL = ('../dashboard/profile/')
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

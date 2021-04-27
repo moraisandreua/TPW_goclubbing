@@ -22,22 +22,22 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 
 urlpatterns = [
-    path('login/', auth_views.LoginView.as_view(template_name='auth.html'), name='login'),
-    path('logout', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
+    path('login/', auth_views.LoginView.as_view(template_name="auth.html"), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     path('signup/', register),
     path('admin/', admin.site.urls),
     path('', index),
     path('search/', search, name='search'),
-    path('search/<int:id>/', searchName),
+    path('search/<int:id>', searchName),
     path('dashboard/', dashboard_home, name='dashboard_home'),
-    path('dashboard/profile', dashboard_profile, name='dashboard_profile'),
-    path('dashboard/newevent', dashboard_newevent, name='dashboard_newevent'),
+    path('dashboard/profile/', dashboard_profile, name='dashboard_profile'),
+    path('dashboard/newevent/', dashboard_newevent, name='dashboard_newevent'),
     path('dashboard/event/<int:num>', dashboard_event, name='dashboard_event'),
-    path('dashboard/newad', dashboard_newad, name='dashboard_newad'),
+    path('dashboard/newad/', dashboard_newad, name='dashboard_newad'),
     path('dashboard/ad/<int:num>', dashboard_ad, name='dashboard_ad'),
-    path('dashboard/events', dashboard_my_events, name='dashboard_my_events'),
-    path('dashboard/ads', dashboard_my_ads, name='dashboard_my_ads'),
-    path('dashboard/comments', dashboard_my_comments, name='dashboard_my_comments'),
+    path('dashboard/events/', dashboard_my_events, name='dashboard_my_events'),
+    path('dashboard/ads/', dashboard_my_ads, name='dashboard_my_ads'),
+    path('dashboard/comments/', dashboard_my_comments, name='dashboard_my_comments'),
     path('dashboard/delete/<int:num>', dashboard_delete, name='dashboard_delete'),
 ]
 

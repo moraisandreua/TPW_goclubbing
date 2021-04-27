@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from app.models import Event, Business, Advertisement, Comment
 from django.contrib.auth.models import User
-from app.forms import EditProfileForm, AddEventForm, EditEventForm, AddAdvertForm, EditAdvertForm, Register
+from app.forms import EditProfileForm, AddEventForm, EditEventForm, AddAdvertForm, EditAdvertForm, Register, Login
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 from app.models import Business, BusinessPhoto, Event
 from django.shortcuts import redirect
+from django.contrib.auth import authenticate
 
 import folium
 import geocoder
@@ -14,7 +15,6 @@ import geocoder
 # Create your views here.
 def index(request):
     return render(request, "index.html", {})
-
 
 def register(request):
     if request.method == 'POST':
@@ -29,7 +29,7 @@ def register(request):
             except:
                 return render(request, "auth.html", {'auth_signup':True, 'form':form, 'message': {'type': "error", 'body': 'Utilizador já existe!'}})
 
-            return redirect('/login', message={'type': "success", 'body': 'Utilizador criado com sucesso!'})
+            return redirect('/login/', message={'type': "success", 'body': 'Utilizador criado com sucesso!'})
     else:
         form = Register()
 
