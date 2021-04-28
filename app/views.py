@@ -219,7 +219,7 @@ def dashboard_newad(request):
             return render(request, "dash_new_ad.html", {'form': form, 'error': True})
     else:
         form = AdvertForm()
-        form.fields['event'].queryset = Event.objects.filter(business=request.user)
+        form.fields['event'].queryset = Event.objects.filter(business__user=request.user)
         return render(request, "dash_new_ad.html", {'form': form, 'error': False})
 
 
