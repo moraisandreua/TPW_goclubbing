@@ -113,6 +113,8 @@ body{
 .modalImages{
     margin-top: 15px;
     width:100%;
+    display: flex;
+    overflow-x: scroll;
 }
 
 .modalImages img{
@@ -125,4 +127,16 @@ body{
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+.ModalTitle{
+    padding: 20px 5px;
+    font-weight: bold;
+    font-size: 15pt;
+    border-bottom: 2px solid black;
+}
+
+.modalEvent{
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
 }

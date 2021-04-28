@@ -115,7 +115,6 @@ def searchName(request, id):
     businessPhoto = BusinessPhoto.objects.filter(business=business)
     photoUrls = []
     for photo in businessPhoto:
-        print(photo.path.url)
         photoUrls.append(photo.path.url)
     events = Event.objects.filter(business=business)
     businessType = business.type
@@ -128,6 +127,7 @@ def searchName(request, id):
     context = {
         'my_map': m,
         'businessName': business.name,
+        'businessProfilePhoto': business.profilePhoto,
         'businessPhoto': photoUrls,
         'events': events,
         'businessType': businessType,

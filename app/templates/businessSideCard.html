@@ -5,18 +5,24 @@
     <div id="modal" class="modal">
         <div class="info">
             <div class="infoPic">
+                <img src="../{{ businessProfilePhoto }}"/>
             </div>
             <div class="infoText">
-                <div class="infoTextName">{{ businessName }}</div>
+                <div class="infoTextName"><b>{{ businessName }}</b></div>
                 <div class="infoTextName">{{ businessType }}</div>
             </div>
         </div>
         <div class="modalImages">
-            {% for image in businessPhotos %}
+            {% for image in businessPhoto %}
                 <img src="{{ image }}"/>
             {% endfor %}
         </div>
-        <div></div>
+        <div class="ModalTitle">
+            Events:
+        </div>
+        <div class="modalEvent">
+
+        </div>
     </div>
 
 {% endblock %}
