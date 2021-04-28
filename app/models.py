@@ -48,7 +48,7 @@ class Event(models.Model):
 
 class EventPhoto(models.Model):
     path = models.FileField(upload_to="event_photos/")
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, related_name='images', on_delete=models.CASCADE)
 
 
 class Comment(models.Model):

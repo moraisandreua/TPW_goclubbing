@@ -80,9 +80,7 @@ body{
     bottom:0;
     right:0;
     background-color: white;
-    width: 30vw;
-    display: flex;
-    flex-direction: column;
+    width: 25vw;
     padding: 5px;
     overflow-y: scroll;
     transition: 0.5s all;
@@ -136,7 +134,32 @@ body{
     border-bottom: 2px solid black;
 }
 
+.modalEvents{
+    padding: 10px;
+}
+
 .modalEvent{
+    width:100%;
     padding: 10px;
     border-bottom: 1px solid lightgray;
+}
+
+.modalEventTitle{
+    font-size:12pt;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.modalEventTitle img{
+    margin-right: 10px;
+}
+
+.modalEventImages{
+    display: flex;
+    overflow-x: scroll;
+}
+
+.modalEventImages img{
+    width:100%;
 }

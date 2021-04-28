@@ -134,7 +134,7 @@ def searchName(request, id):
         'businessPhoto': photoUrls,
         'events': events,
         'businessType': businessType,
-        'type': types
+        'types': types
     }
 
     return render(request, 'businessSideCard.html', context)
@@ -219,6 +219,7 @@ def dashboard_newad(request):
             return render(request, "dash_new_ad.html", {'form': form, 'error': True})
     else:
         form = AdvertForm()
+        form.fields['event'].queryset = Event.objects.filter(business=request.user)
         return render(request, "dash_new_ad.html", {'form': form, 'error': False})
 
 

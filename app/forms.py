@@ -26,7 +26,7 @@ class EventForm(forms.Form):
 
 
 class AdvertForm(forms.Form):
-    event = forms.ModelChoiceField(queryset=Event.objects)
+    event = forms.ModelChoiceField(queryset=Event.objects.all())
     date = forms.DateTimeField(widget=forms.DateInput(attrs={'type': 'date-local'}))
     expire = forms.DateTimeField()
     body = forms.CharField(max_length=100)

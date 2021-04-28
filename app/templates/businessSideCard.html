@@ -1,5 +1,5 @@
 {% extends "search.html" %}
-
+{% load static %}
 {% block sideCard %}
 
     <div id="modal" class="modal">
@@ -20,8 +20,32 @@
         <div class="ModalTitle">
             Events:
         </div>
-        <div class="modalEvent">
+        <div class="modalEvents">
+            {% for e in events %}
+                <div class="modalEvent">
 
+                    <div class="modalEventImages">
+                        {% for im in e.images.all %}
+                            <img src="../{{ im.path }}"/>
+                        {% endfor %}
+                    </div>
+                    <div class="modalEventTitle">
+                        {{ e.name }} ({{ e.min_age }}+)
+                    </div>
+                    <div class="modalEventTitle">
+                        <img src="{% static "img/schedule.png" %}"/>{{ e.datetime }}
+                    </div>
+                    <div class="modalEventTitle">
+                        <img src="{% static "img/location.png" %}"/>{{ e.location }}
+                    </div>
+                    <div class="modalEventTitle">
+                        <img src="{% static "img/theme.png" %}"/>{{ e.theme }}
+                    </div>
+                    <div class="modalEventTitle">
+                        <img src="{% static "img/dress-code.png" %}"/>{{ e.dress_code }}
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 
