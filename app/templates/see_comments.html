@@ -3,12 +3,12 @@
 {% block content %}
 <div>
     <div>
-        <h4 class="form-title" style="color:#000; margin-top: 4%;">My Events</h4>
+        <h4 class="form-title" style="color:#000; margin-top: 4%;">My Comments</h4>
     </div>
     <ul class="list-group list-group-flush my-list">
         {% for comment in comments %}
             {% if comment.event.business == self %}
-        <li class="list-group-item"><p style="margin-bottom: 0%">Comment in {{ comment.event }}<a ><i class="fa fa-trash black"></i></a></p>{% with ''|center:comment.classification as range %} {% for n in range %} <i class="fa fa-star"></i> {% endfor %}{% endwith %}<p style="color:#696969;">{{ comment.body }}</p></li>
+        <li class="list-group-item"><p style="margin-bottom: 0%">Comment in {{ comment.event }}<a href="{% url 'dashboard_comment_delete' num=comment.id %}"><i class="fa fa-trash black"></i></a></p>{% with ''|center:comment.classification as range %} {% for n in range %} <i class="fa fa-star"></i> {% endfor %}{% endwith %}<p style="color:#696969;">{{ comment.body }}</p></li>
             {% endif %}
         {% endfor %}
     </ul>

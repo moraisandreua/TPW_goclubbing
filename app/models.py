@@ -57,7 +57,7 @@ class Comment(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.body.strip(".")[0]  # First sentence is returned
+        return self.body
 
 
 class Advertisement(models.Model):

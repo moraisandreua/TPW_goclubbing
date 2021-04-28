@@ -250,7 +250,7 @@ html, body {
     display: inline-block;
     margin-left: 1vw;
     border-radius: 20px;
-    padding: 3% 3% 3% 3%;
+    padding: 3%;
 }
 
 .profiles {
@@ -288,10 +288,11 @@ html, body {
     display: inline-block;
     margin-left: 1vw;
     border-radius: 20px;
+    padding-top: 2%;
 }
 
 .prof-text{
-    margin: 5%;
+    margin: 3%;
 }
 
 .comments {
@@ -334,7 +335,6 @@ html, body {
     margin-left: 1vw;
     margin-bottom: 1vw;
     border-radius: 20px;
-    padding: -50%;
 }
 
 .comment-title{

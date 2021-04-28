@@ -8,7 +8,7 @@
     <ul class="list-group list-group-flush my-list">
         {% for event in events %}
             {% if event.business == self %}
-        <li class="list-group-item">{{ event.name}}<a ><i class="fa fa-trash black"></i></a><a href={% url 'dashboard_event' num=event.id %}><i style="float: right" class="fa fa-pencil edit-list"></i></a></li>
+        <li class="list-group-item">{{ event.name}}<a href="{% url 'dashboard_delete' num=event.id %}"><i class="fa fa-trash black"></i></a><a href={% url 'dashboard_event' num=event.id %}><i style="float: right" class="fa fa-pencil edit-list"></i></a></li>
         {% endif %}
         {% endfor %}
     </ul>

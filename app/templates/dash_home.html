@@ -59,7 +59,7 @@
         <div class="profile-content">
             <div class="profile">
                 <p class="prof-text">{{ self.name }} | {{ self.type }}</p>
-                <p class="prof-text">{{ self.location }}</p>
+                <p class="prof-text">{{ self.address }}, {{ self.location }}</p>
                 <p class="prof-text">{{ self.contact_email }} | {{ self.contact_phone }}</p>
             </div>
         </div>
@@ -72,9 +72,9 @@
             {% for comment in comments %}
                 {% if comment.event.business == self %}
             <div class="comment">
-                    <p class="fa" style="font-weight: bold">Comment in {{ comment.event }} <a href={% url 'dashboard_delete' num=1 %}><i style="color:black;" class="fa fa-trash"></i></a></p>
-                    <p class="grey">{{ comment.classification }}</p>
-                    <p class="grey">{{ comment.body|truncatewords:50 }}</p>
+                    <p style="font-weight: bold; margin-top: -8%; margin-left: 4%">Comment in {{ comment.event }} <a href={% url 'dashboard_comment_delete' num=comment.id %}><i style="color:black;" class="fa fa-trash"></i></a></p>
+                    <p style="margin-top: -13.5%; margin-left: 2.5%">{% with ''|center:comment.classification as range %} {% for n in range %} <i class="fa fa-star"></i> {% endfor %}{% endwith %}</p>
+                    <p class="grey" style="margin-top: -14%; margin-left: 4%">{{ comment.body|truncatewords:15 }}</p>
             </div>
                 {% endif %}
             {% endfor %}

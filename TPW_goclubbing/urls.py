@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
-from app.views import index, search, searchName, dashboard_profile, dashboard_home, dashboard_newevent, dashboard_event, dashboard_newad, dashboard_ad, register, dashboard_my_events, dashboard_my_ads, dashboard_my_comments, dashboard_delete
+from app.views import index, search, searchName, dashboard_profile, dashboard_home, dashboard_newevent, dashboard_event, \
+    dashboard_newad, dashboard_ad, register, dashboard_my_events, dashboard_my_ads, dashboard_my_comments, \
+    dashboard_delete, dashboard_ad_delete, dashboard_comment_delete
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
@@ -32,13 +34,15 @@ urlpatterns = [
     path('dashboard/', dashboard_home, name='dashboard_home'),
     path('dashboard/profile/', dashboard_profile, name='dashboard_profile'),
     path('dashboard/newevent/', dashboard_newevent, name='dashboard_newevent'),
-    path('dashboard/event/<int:num>', dashboard_event, name='dashboard_event'),
+    path('dashboard/event/<int:num>/', dashboard_event, name='dashboard_event'),
     path('dashboard/newad/', dashboard_newad, name='dashboard_newad'),
-    path('dashboard/ad/<int:num>', dashboard_ad, name='dashboard_ad'),
+    path('dashboard/ad/<int:num>/', dashboard_ad, name='dashboard_ad'),
     path('dashboard/events/', dashboard_my_events, name='dashboard_my_events'),
     path('dashboard/ads/', dashboard_my_ads, name='dashboard_my_ads'),
     path('dashboard/comments/', dashboard_my_comments, name='dashboard_my_comments'),
     path('dashboard/delete/<int:num>', dashboard_delete, name='dashboard_delete'),
+    path('dashboard/add/delete/<int:num>', dashboard_ad_delete, name='dashboard_ad_delete'),
+    path('dashboard/comment/delete/<int:num>', dashboard_comment_delete, name='dashboard_comment_delete'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
