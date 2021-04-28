@@ -72,7 +72,14 @@ def search(request):
         folium.Marker(location=[business.lat, business.lng], popup=popup).add_to(m)
 
     m = m._repr_html_()
-    context = {'my_map': m}
+
+    types=[]
+
+    for x in Business.objects.all():
+        if x.type.lower()[0].upper() + x.type.lower()[1:] not in types:
+            types.append(x.type.lower()[0].upper() + x.type.lower()[1:])
+
+    context = {'my_map': m, 'types':types}
 
     return render(request, 'search.html', context)
 
@@ -113,13 +120,18 @@ def searchName(request, id):
     events = Event.objects.filter(business=business)
     businessType = business.type
 
+    types=[]
+    for x in Business.objects.all():
+        if x.type.lower()[0].upper() + x.type.lower()[1:] not in types:
+            types.append(x.type.lower()[0].upper() + x.type.lower()[1:])
 
     context = {
         'my_map': m,
         'businessName': business.name,
         'businessPhoto': photoUrls,
         'events': events,
-        'businessType': businessType
+        'businessType': businessType,
+        'type':types
     }
 
     return render(request, 'businessSideCard.html', context)

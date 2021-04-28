@@ -22,47 +22,32 @@
         <div class="navbarSelect">
             <select>
                 <option>Localização</option>
-                <option>Aveiro</option>
-                <option>Beja</option>
-                <option>Braga</option>
-                <option>Bragança</option>
-                <option>Castelo Branco</option>
-                <option>Coimbra</option>
-                <option>Évora</option>
-                <option>Faro</option>
-                <option>Guarda</option>
-                <option>Leiria</option>
-                <option>Lisboa</option>
-                <option>Portalegre</option>
-                <option>Porto</option>
-                <option>Santarem</option>
-                <option>Setúbal</option>
-                <option>Viana do Castelo</option>
-                <option>Vila Real</option>
-                <option>Viseu</option>
+                <option value="Aveiro">Aveiro</option>
+                <option value="Beja">Beja</option>
+                <option value="Braga">Braga</option>
+                <option value="Bragança">Bragança</option>
+                <option value="Castelo Branco">Castelo Branco</option>
+                <option value="Coimbra">Coimbra</option>
+                <option value="Évora">Évora</option>
+                <option value="Faro">Faro</option>
+                <option value="Guarda">Guarda</option>
+                <option value="Leiria">Leiria</option>
+                <option value="Lisboa">Lisboa</option>
+                <option value="Portalegre">Portalegre</option>
+                <option value="Porto">Porto</option>
+                <option value="Santarem">Santarem</option>
+                <option value="Setúbal">Setúbal</option>
+                <option value="Viana do Castelo">Viana do Castelo</option>
+                <option value="Vila Real">Vila Real</option>
+                <option value="Viseu">Viseu</option>
             </select>
         </div>
         <div class="navbarSelect">
             <select>
-                <option>Localização</option>
-                <option>Aveiro</option>
-                <option>Beja</option>
-                <option>Braga</option>
-                <option>Bragança</option>
-                <option>Castelo Branco</option>
-                <option>Coimbra</option>
-                <option>Évora</option>
-                <option>Faro</option>
-                <option>Guarda</option>
-                <option>Leiria</option>
-                <option>Lisboa</option>
-                <option>Portalegre</option>
-                <option>Porto</option>
-                <option>Santarem</option>
-                <option>Setúbal</option>
-                <option>Viana do Castelo</option>
-                <option>Vila Real</option>
-                <option>Viseu</option>
+                <option>Estabelecimento</option>
+                {% for x in types %}
+                    <option value="{{ x }}">{{ x }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="navbarSelect">
