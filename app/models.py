@@ -15,6 +15,7 @@ class Business(models.Model):
     contact_email = models.EmailField(max_length=100)
     contact_phone = models.IntegerField()
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profilePhoto = models.FileField(upload_to="business_photos/", default="business_photos/userDefault.png")
 
     def __str__(self):
         return self.name
