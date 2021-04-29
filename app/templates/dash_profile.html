@@ -6,8 +6,16 @@
             {% csrf_token %}
             <h4 class="form-title">Edit Profile</h4>
             <div class="form-group">
+                {{ form.profilePhoto.label_tag }}
+                {{ form.profilePhoto }}
+            </div>
+            <div class="form-group">
                 {{ form.name.label_tag }}
                 {{ form.name }}
+            </div>
+            <div class="form-group">
+                {{ form.address.label_tag }}
+                {{ form.address }}
             </div>
             <div class="form-group">
                 {{ form.location.label_tag }}
@@ -19,7 +27,7 @@
             </div>
             <div class="form-group">
                 {{ form.company_name.label_tag }}
-                    {{ form.company_name }}
+                {{ form.company_name }}
             </div>
             <div class="form-group">
                 {{ form.contact_email.label_tag }}
@@ -37,6 +45,10 @@
             <div class="form-group col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default">
             </div>
+
+				{% for field in form %}
+					{% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+				{% endfor %}
 
         </form>
 

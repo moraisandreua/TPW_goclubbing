@@ -49,7 +49,7 @@ class Event(models.Model):
 
 class EventPhoto(models.Model):
     path = models.FileField(upload_to="event_photos/")
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, related_name='images', on_delete=models.CASCADE)
 
 
 class Comment(models.Model):
@@ -58,7 +58,7 @@ class Comment(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.body.strip(".")[0]  # First sentence is returned
+        return self.body
 
 
 class Advertisement(models.Model):

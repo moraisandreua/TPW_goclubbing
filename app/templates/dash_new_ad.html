@@ -21,11 +21,11 @@
             </div>
 
             <div class="form-group col-md-offset-2 col-md-10">
-                <a type="submit" value="Save" class="btn btn-default" href="{% url 'dashboard_home' %}">Save</a>
+                <input type="submit" value="Save" class="btn btn-default">
             </div>
-            {% if error %}
-            <p style="color:#FF6347;"> {{ error }}</p>
-            {% endif %}
+				{% for field in form %}
+					{% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+				{% endfor %}
         </form>
 
     </div>
