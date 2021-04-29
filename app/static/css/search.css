@@ -5,6 +5,8 @@
 
 body{
     margin:0px;
+    overflow-x: hidden;
+    overflow-y: hidden ;
 }
 
 .navbar{
@@ -12,12 +14,19 @@ body{
     padding: 15px;
     display: flex;
     box-shadow: 0px 10px 2px #d3d3d3;
+    justify-content: space-between;
+}
+
+.navbarLogo {
+    width: 20vw !important;
 }
 
 .navbar div{
     width: 100%;
     padding: 0px 10px;
 }
+
+
 
 .navbarLogo img{
     height: 64px;
@@ -129,6 +138,53 @@ body{
     height: 100%;
 }
 
+.searchBoxInputContainer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#textbox {
+    width: 40vw;
+    height: 5vh;
+    margin-top: 2vh;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-color: black;
+    padding: 1vw;
+    background-color: white;
+    color: black;
+}
+
+#button {
+    border-top-right-radius: 20px ;
+    border-bottom-right-radius: 20px ;
+    border-color: black;
+    height: 5vh;
+    width: 7vw;
+    background-color: black;
+    color: white;
+    padding-right: 1vw;
+    font-size: 1vw;
+}
+
+.filterContainer {
+    display: flex;
+    width: 75vw !important;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 2vw;
+    text-decoration: none;
+}
+
+.filterContainer a {
+    text-decoration: none;
+}
+.filterContainer a:visited{
+    text-decoration: none;
+    color: black;
+}
+
 .ModalTitle{
     padding: 20px 5px;
     font-weight: bold;
@@ -139,4 +195,105 @@ body{
 .modalEvent{
     padding: 10px;
     border-bottom: 1px solid lightgray;
+}
+
+.formLine {
+    display: flex;
+    justify-content: space-between;
+    padding: 1vw 2vw 1vw 2vw;
+    align-content: center;
+}
+
+.formLine label {
+    font-size: 1.2vw;
+    width: 40%;
+}
+
+.formLine input {
+    width: 100%;
+    border-radius: 2vw;
+    border-color: black;
+    padding: 0.5vw;
+}
+
+.formLine select {
+    width: 100%;
+    border-radius: 2vw;
+    border-color: black;
+    padding: 0.5vw;
+}
+
+.formLine:first-of-type select {
+    width: 50%;
+    margin-right: 0.2vw;
+}
+
+#filterTitle {
+    padding-left: 2vw;
+}
+
+#filterButton {
+    margin-top: 2vh;
+    width: 100%;
+    height: 5vh;
+    border-radius: 2vw;
+    border-color: black;
+    background-color: black;
+    color: white;
+}
+
+.modal {
+    padding: 1vw;
+}
+
+.eventCard {
+    display: flex;
+    background-color: black;
+    color: white;
+    border-radius: 2vw;
+    padding: 1.5vw;
+    padding-left: 1vw;
+    justify-content: space-between;
+    margin-bottom: 2vh;
+}
+
+.eventCard > div  {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.nameAndBusiness {
+    border-radius: 2vw;
+    background-color: white;
+    color: black;
+    padding: 1vw;
+}
+
+.typeAndLocation {
+    margin-top: 1vh;
+}
+
+.typeAndLocation > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.eventType {
+    margin-left: 1vw;
+}
+.eventLocation {
+    margin-left: 1vw;
+}
+
+.eventBusiness {
+    font-size: 2vw;
+}
+
+.linkBusiness {
+    text-decoration: none;
+}
+
+.linkBusiness:visited {
+    text-decoration: none;
 }

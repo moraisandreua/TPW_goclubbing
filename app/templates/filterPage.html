@@ -1,0 +1,45 @@
+{% extends "search.html" %}
+
+{% block sideCard %}
+
+    <div id="modal" class="modal">
+        <h1 id="filterTitle">Filter</h1>
+        <form action="." method="post">
+            {% csrf_token %}
+            <div class="formLine">
+            <label>Date</label>
+            {{ form.date }}
+            </div>
+            <div class="formLine">
+            <label>Location</label>
+            {{ form.location }}
+            </div>
+            <div class="formLine">
+            <label>Type</label>
+            {{ form.type }}
+            </div>
+            <div class="formLine">
+            <label>Theme</label>
+            {{ form.theme }}
+            </div>
+            <div class="formLine">
+            <label>Min. Age</label>
+            {{ form.age }}
+            </div>
+            <div class="formLine">
+            <label>Business</label>
+            {{ form.business }}
+            </div>
+            <div class="formLine">
+            <label>Event Name</label>
+            {{ form.name }}
+            </div>
+            <div class="formLine">
+            <label>Business Type</label>
+            {{ form.business_type }}
+            </div>
+            <button id="filterButton" type="submit" >Search</button>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,6 +1,17 @@
 {% load static %}
 <head>
     <link rel="stylesheet" type="text/css" href="{% static "css/search.css" %}">
+    <style>
+        @font-face {
+            src: local("Biko_Regular"), url("/static/font/Biko_Regular.ttf");
+            font-family: Biko;
+        }
+
+        *{
+            box-sizing: border-box;
+            font-family: Biko;
+        }
+    </style>
     <script>
         function openModal(){
             document.getElementById('modal').style.width="25vw";
@@ -15,10 +26,17 @@
 </head>
 <body>
     <div class="navbar">
-        <div class="navbarLogo"><img src="{% static "img/logo.png" %}"/></div>
-        <div>
-
+        <div class="navbarLogo"><a href="/"><img src="{% static "img/logo.png" %}"/></a></div>
+        <div class="filterContainer">
+            <a href="/search/filter/">Filter</a>
         </div>
+        <div class="searchBoxInputContainer">
+            <form action="{% url 'search' %}" >
+                {% csrf_token %}
+                <input id="textbox" type="text" placeholder="Search for Places by name, location..." name="query"/><button id="button" type="submit" class="findButton">Find events</button>
+            </form>
+        </div>
+    <!--
         <div class="navbarSelect">
             <select>
                 <option>Localização</option>
@@ -42,6 +60,8 @@
                 <option value="Viseu">Viseu</option>
             </select>
         </div>
+        -->
+        <!--
         <div class="navbarSelect">
             <select>
                 <option>Estabelecimento</option>
@@ -53,7 +73,7 @@
         <div class="navbarSelect">
             <input type="text" class="navbarSearch" placeholder="Search..."/>
         </div>
-
+        -->
     </div>
     <div class="container" id="mapdiv">
         <div class="map">{% include "map.html" %}</div>

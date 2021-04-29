@@ -1,0 +1,24 @@
+{% extends "search.html" %}
+
+{% block sideCard %}
+
+    <div id="modal" class="modal">
+        <h1>Results</h1>
+        {% for event in events %}
+            <a href="/search/{{ event.business.id }}" class="linkBusiness">
+                <div class="eventCard">
+                    <div class="nameAndBusiness">
+                    <div class="eventBusiness">{{ event.business }}</div>
+                    <div class="eventName">{{ event.name }}</div>
+                    </div>
+                    <div class="typeAndLocation">
+                    <div><div>Type:</div><div class="eventType">{{ event.type }}</div></div>
+                    <div><div>Location:</div><div class="eventLocation">{{ event.location }}</div></div>
+                    </div>
+
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+{% endblock %}

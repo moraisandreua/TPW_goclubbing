@@ -1,5 +1,5 @@
 from django import forms
-from app.models import Event_Type, Event
+from app.models import Event_Type, Event, Business
 
 
 class EditProfileForm(forms.Form):
@@ -60,3 +60,25 @@ class Register(forms.Form):
 class Login(forms.Form):
     username = forms.CharField(label='Username:', max_length=15)
     password = forms.CharField(label='Password:', max_length=30, widget=forms.PasswordInput())
+
+
+class Filter(forms.Form):
+    types = []
+    type = []
+    i = 1
+    for x in Business.objects.all():
+        if x.type.lower()[0].upper() + x.type.lower()[1:] not in type:
+            types.append((x.type.lower()[0].upper() + x.type.lower()[1:], x.type.lower()[0].upper() + x.type.lower()[1:]))
+            type.append(x.type.lower()[0].upper() + x.type.lower()[1:])
+            i = i+1
+
+    date = forms.DateField(label='Date', widget=forms.SelectDateWidget, required=False)
+    location = forms.CharField(label='Location', max_length=30, required=False)
+    type = forms.ModelChoiceField(label='Type', queryset=Event_Type.objects, required=False)
+    theme = forms.CharField(label='Theme', required=False)
+    business = forms.CharField(label='Business', max_length=30, required=False)
+    age = forms.IntegerField(required=False)
+    name = forms.CharField(label='Event Name', max_length=50, required=False)
+    business_type = forms.ChoiceField(choices=tuple(types), widget=forms.Select(), required=False)
+
+

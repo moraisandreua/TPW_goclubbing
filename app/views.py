@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from app.models import Event, Business, Advertisement, Comment
 from django.contrib.auth.models import User
-from app.forms import EditProfileForm, AddEventForm, EditEventForm, AddAdvertForm, EditAdvertForm, Register, Login
+from app.forms import EditProfileForm, AddEventForm, EditEventForm, AddAdvertForm, EditAdvertForm, Register, Login, Filter
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 from app.models import Business, BusinessPhoto, Event
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate
+from django.db.models import Q
 
 import folium
 import geocoder
@@ -60,7 +61,7 @@ def search(request):
     businesses = Business.objects.all()
     for business in businesses:
         if business.lat is None or business.lng is None:
-            geo = geocoder.mapquest(business.location, key=api_key)
+            geo = geocoder.mapquest(business.address, key=api_key)
             latlng = geo.latlng
             business.lat = latlng[0]
             business.lng = latlng[1]
@@ -73,7 +74,7 @@ def search(request):
 
     m = m._repr_html_()
 
-    types=[]
+    types = []
 
     for x in Business.objects.all():
         if x.type.lower()[0].upper() + x.type.lower()[1:] not in types:
@@ -98,7 +99,7 @@ def searchName(request, id):
     businesses = Business.objects.all()
     for bus in businesses:
         if bus.lat is None or bus.lng is None:
-            geo = geocoder.mapquest(bus.location, key=api_key)
+            geo = geocoder.mapquest(bus.address, key=api_key)
             latlng = geo.latlng
             bus.lat = latlng[0]
             bus.lng = latlng[1]
@@ -135,6 +136,79 @@ def searchName(request, id):
     }
 
     return render(request, 'businessSideCard.html', context)
+
+def filter(request):
+
+    api_key = '0p7iGyKlT41Pu8b0SQsqxGDpTDNLoQNu'
+
+    geo = geocoder.mapquest("Portugal", key=api_key)
+    startPoint = geo.latlng
+
+    f = folium.Figure(width=1000, height=1000)
+    m = folium.Map(startPoint, zoom_start=7).add_to(f)
+    folium.TileLayer('cartodbpositron').add_to(m)
+
+    # depois aqui coloca-se os vários markers da base de dados
+
+    businesses = Business.objects.all()
+    for bus in businesses:
+        if bus.lat is None or bus.lng is None:
+            geo = geocoder.mapquest(bus.address, key=api_key)
+            latlng = geo.latlng
+            bus.lat = latlng[0]
+            bus.lng = latlng[1]
+            bus.save()
+
+        pp = folium.Html("<a href='/search/" + str(bus.id) + "' target='_parent'>" + bus.name + "</a>",
+                         script=True)
+        popup = folium.Popup(pp, max_width=2650)
+        folium.Marker(location=[bus.lat, bus.lng], popup=popup).add_to(m)
+
+    m = m._repr_html_()
+
+    if request.method == 'POST':
+        form = Filter(request.POST)
+        if form.is_valid():
+            events = Event.objects.all()
+            if form.cleaned_data['date'] is not None:
+                events = events.filter(datetime__gte=form.cleaned_data['date'])
+            if form.cleaned_data['location'] is not None:
+                events = events.filter(location__icontains=form.cleaned_data['location'])
+            if form.cleaned_data['type'] is not None:
+                events = events.filter(type__exact=form.cleaned_data['type'])
+            if form.cleaned_data['theme'] is not None:
+                events = events.filter(theme__icontains=form.cleaned_data['theme'])
+            if form.cleaned_data['business'] is not None:
+                events = events.filter(business__event__name__icontains=form.cleaned_data['business'])
+            if form.cleaned_data['age'] is not None:
+                events = events.filter(min_age__gte=form.cleaned_data['age'])
+            if form.cleaned_data['name'] is not None:
+                events = events.filter(name__icontains=form.cleaned_data['name'])
+
+            finalEvents = events
+            if form.cleaned_data['business_type'] is not None:
+                business = Business.objects.filter(type__icontains=form.cleaned_data['business_type'])
+
+                finalEvents = []
+                for event in events:
+                    if event.business in business:
+                        finalEvents.append(event)
+
+        context = {
+            'my_map': m,
+            'events': finalEvents
+        }
+        return render(request, 'listEvents.html', context)
+    else:
+
+        form = Filter()
+
+        context = {
+            'my_map': m,
+            'form': form
+        }
+
+        return render(request, 'filterPage.html', context)
 
 
 def dashboard_home(request):

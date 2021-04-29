@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
-from app.views import index, search, searchName, dashboard_profile, dashboard_home, dashboard_newevent, dashboard_event, dashboard_newad, dashboard_ad, register, dashboard_my_events, dashboard_my_ads, dashboard_my_comments, dashboard_delete
+from app.views import index, search, searchName, dashboard_profile, dashboard_home, dashboard_newevent, dashboard_event, dashboard_newad, dashboard_ad, register, dashboard_my_events, dashboard_my_ads, dashboard_my_comments, dashboard_delete, filter
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
@@ -29,6 +29,7 @@ urlpatterns = [
     path('', index),
     path('search/', search, name='search'),
     path('search/<int:id>', searchName),
+    path('search/filter/', filter, name='filter'),
     path('dashboard/', dashboard_home, name='dashboard_home'),
     path('dashboard/profile/', dashboard_profile, name='dashboard_profile'),
     path('dashboard/newevent/', dashboard_newevent, name='dashboard_newevent'),
