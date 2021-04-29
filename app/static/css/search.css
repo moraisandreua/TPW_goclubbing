@@ -301,3 +301,34 @@ body{
 .linkBusiness:visited {
     text-decoration: none;
 }
+
+.modalEvents{
+    padding: 10px;
+}
+
+.modalEvent{
+    width:100%;
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+.modalEventTitle{
+    font-size:12pt;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.modalEventTitle img{
+    margin-right: 10px;
+}
+
+.modalEventImages{
+    display: flex;
+    overflow-x: scroll;
+}
+
+.modalEventImages img{
+    width:100%;
+}
