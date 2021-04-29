@@ -4,6 +4,11 @@ html, body {
     width: 100%;
     overflow: auto;
 }
+
+h1{
+    margin-top: 0.5vh !important;
+    margin-bottom: 0vh!important;
+}
 .grid-container {
   display: grid;
   grid-template-columns: 15vw 1fr;
@@ -178,6 +183,7 @@ html, body {
     "content";
     height: 100%;
     width: 100%;
+    padding-top: 1vh;
 }
 
 .events > .title {
@@ -219,6 +225,7 @@ html, body {
     grid-template-areas:
     "title"
     "content";
+    padding-top: 1vh;
 }
 
 .pubs > .title {
@@ -250,7 +257,7 @@ html, body {
     display: inline-block;
     margin-left: 1vw;
     border-radius: 20px;
-    padding: 3%;
+    padding: 1% 3%;
 }
 
 .profiles {
@@ -261,6 +268,7 @@ html, body {
     grid-template-areas:
     "title"
     "content";
+    padding-top: 1vh;
 }
 
 .profiles > title{
@@ -303,6 +311,7 @@ html, body {
     grid-template-areas:
     "title"
     "content";
+    padding-top: 1vh;
 }
 
 .comments > .title {

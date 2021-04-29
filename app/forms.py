@@ -11,7 +11,8 @@ class EditProfileForm(forms.Form):
     opening_hours = forms.JSONField()
     contact_phone = forms.IntegerField(label="Phone Number:")
     contact_email = forms.EmailField(label="Email:")
-    #profilePhoto = forms.FileField(label="Profile Image:")
+    profilePhoto = forms.ImageField(label="Profile Image:", required=False, widget=forms.FileInput)
+    image = forms.ImageField(label="Add New Business Image:", required=False, widget=forms.FileInput)
 
 
 class EventForm(forms.Form):
@@ -23,6 +24,7 @@ class EventForm(forms.Form):
     min_age = forms.IntegerField()
     organization = forms.CharField(max_length=100)
     dress_code = forms.CharField(max_length=100)
+    image = forms.ImageField(label="Add New Event Image:", required=False, widget=forms.FileInput)
 
 
 class AdvertForm(forms.Form):

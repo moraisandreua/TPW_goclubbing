@@ -6,6 +6,10 @@
             {% csrf_token %}
             <h4 class="form-title">Edit Event</h4>
             <div class="form-group">
+                {{ form.image.label_tag }}
+                {{ form.image }}
+            </div>
+            <div class="form-group">
                 {{ form.name.label_tag }}
                 {{ form.name }}
             </div>

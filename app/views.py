@@ -1,15 +1,14 @@
 from django.shortcuts import render
 from app.models import Event, Business, Advertisement, Comment
 from django.contrib.auth.models import User
-from app.forms import EditProfileForm, Register, Login, Filter
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 from app.models import Business, BusinessPhoto, Event
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate
 from django.db.models import Q
-from app.forms import EditProfileForm, EventForm, AdvertForm, Register
-from app.models import Business, BusinessPhoto, Event
+from app.forms import EditProfileForm, EventForm, AdvertForm, Register, Filter
+from app.models import Business, BusinessPhoto, Event, EventPhoto, BusinessPhoto
 from django.shortcuts import redirect
 import logging
 
@@ -221,6 +220,8 @@ def filter(request):
 
 
 def dashboard_home(request):
+    if not request.user.is_authenticated or request.user.business == None:
+        return redirect('/login')
     events = Event.objects.all()
     ads = Advertisement.objects.all()
     comments = Comment.objects.all()
@@ -230,6 +231,8 @@ def dashboard_home(request):
 
 
 def dashboard_newevent(request):
+    if not request.user.is_authenticated or request.user.business == None:
+        return redirect('/login')
     if request.method == 'POST':
         form = EventForm(request.POST)
         if form.is_valid():
@@ -255,6 +258,8 @@ def dashboard_newevent(request):
 
 
 def dashboard_event(request, num):
+    if not request.user.is_authenticated or request.user.business == None:
+        return redirect('/login')
     current_event = Event.objects.get(id=num)
     if request.method == 'POST':
         form = EventForm(request.POST)
@@ -267,6 +272,11 @@ def dashboard_event(request, num):
             current_event.organization = form.cleaned_data["organization"]
             current_event.dress_code = form.cleaned_data["dress_code"]
             current_event.min_age = form.cleaned_data["min_age"]
+
+            if not form.cleaned_data["image"] is None:
+                event_photo = EventPhoto(path=form.cleaned_data["image"], event=current_event)
+                event_photo.save()
+
             current_event.save()
 
             events = Event.objects.all()
@@ -275,14 +285,16 @@ def dashboard_event(request, num):
             tparams = {'events': events, 'ads': ads, 'comments': comments, 'self': Business.objects.get(user_id=request.user.id)}
             return render(request, "dash_home.html", tparams)
         else:
-            form = EventForm(initial={'name': current_event.name, 'location': current_event.location, 'type': current_event.type, 'theme': current_event.theme, 'datetime': current_event.datetime, 'organization': current_event.organization, 'min_age': current_event.min_age, 'dress_code': current_event.dress_code})
+            form = EventForm(initial={'name': current_event.name, 'location': current_event.location, 'datetime': current_event.datetime, 'type': current_event.type, 'theme': current_event.theme, 'datetime': current_event.datetime, 'organization': current_event.organization, 'min_age': current_event.min_age, 'dress_code': current_event.dress_code})
             return render(request, "dash_event.html", {'num': num, 'eventid':num, 'form': form, 'error': True, 'message': bool(form.errors)})
     else:
-        form = EventForm(initial={'name': current_event.name, 'location': current_event.location, 'type': current_event.type, 'theme': current_event.theme, 'datetime': current_event.datetime, 'organization': current_event.organization, 'min_age': current_event.min_age, 'dress_code': current_event.dress_code})
+        form = EventForm(initial={'name': current_event.name, 'location': current_event.location, 'datetime': current_event.datetime, 'type': current_event.type, 'theme': current_event.theme, 'datetime': current_event.datetime, 'organization': current_event.organization, 'min_age': current_event.min_age, 'dress_code': current_event.dress_code})
         return render(request, "dash_event.html", {'num': num, 'eventid': num,'form': form, 'error': False})
 
 
 def dashboard_newad(request):
+    if not request.user.is_authenticated or request.user.business == None:
+        return redirect('/login')
     if request.method == 'POST':
         form = AdvertForm(request.POST)
         if form.is_valid():
@@ -304,6 +316,8 @@ def dashboard_newad(request):
 
 
 def dashboard_ad(request, num):
+    if not request.user.is_authenticated or request.user.business == None:
+        return redirect('/login')
     current_ad = Advertisement.objects.get(id=num)
     if request.method == 'POST':
         form = AdvertForm(request.POST)
@@ -329,9 +343,11 @@ def dashboard_ad(request, num):
 
 
 def dashboard_profile(request):
+    if not request.user.is_authenticated or request.user.business == None:
+        return redirect('/login')
     current_account = Business.objects.get(user_id=request.user.id)
     if request.method == 'POST':
-        form = EditProfileForm(request.POST)
+        form = EditProfileForm(request.POST, request.FILES)
         if form.is_valid():
             current_account.name = form.cleaned_data["name"]
             current_account.location = form.cleaned_data["location"]
@@ -341,7 +357,13 @@ def dashboard_profile(request):
             current_account.opening_hours = form.cleaned_data["opening_hours"]
             current_account.contact_phone = form.cleaned_data["contact_phone"]
             current_account.contact_email = form.cleaned_data["contact_email"]
-            #current_account.profilePhoto = request.FILES['file']
+            if not form.cleaned_data["profilePhoto"] is None:
+                current_account.profilePhoto = form.cleaned_data["profilePhoto"]
+
+            if not form.cleaned_data["image"] is None:
+                business_photo = BusinessPhoto(path=form.cleaned_data["image"], business=current_account)
+                business_photo.save()
+
             current_account.save()
 
             events = Event.objects.all()
@@ -354,19 +376,21 @@ def dashboard_profile(request):
                                             'type': current_account.type, 'company_name': current_account.company_name,
                                             'contact_phone': current_account.contact_phone,
                                             'contact_email': current_account.contact_email,
-                                            'opening_hours': current_account.opening_hours})
+                                            'opening_hours': current_account.opening_hours, 'profilePhoto': current_account.profilePhoto})
             return render(request, "dash_profile.html",
-                          {'form': form, 'error': True, 'message': bool(form.errors)})
+                          {'form': form, 'error': True, 'message': bool(form.errors), 'img': current_account.profilePhoto})
 
     else:
         form = EditProfileForm(
             initial={'name': current_account.name, 'location': current_account.location, 'address': current_account.address, 'type': current_account.type,
                      'company_name': current_account.company_name, 'contact_phone': current_account.contact_phone,
-                     'contact_email': current_account.contact_email, 'opening_hours': current_account.opening_hours})
-    return render(request, "dash_profile.html", {'form': form, 'error': False})
+                     'contact_email': current_account.contact_email, 'opening_hours': current_account.opening_hours, 'profilePhoto': current_account.profilePhoto})
+    return render(request, "dash_profile.html", {'form': form, 'error': False, 'img': current_account.profilePhoto})
 
 
 def dashboard_my_events(request):
+    if not request.user.is_authenticated or request.user.business == None:
+        return redirect('/login')
     events = Event.objects.all()
     business = Business.objects.get(user_id=request.user.id)
     tparams = {'events': events, 'self': business}
@@ -374,6 +398,8 @@ def dashboard_my_events(request):
 
 
 def dashboard_my_ads(request):
+    if not request.user.is_authenticated or request.user.business == None:
+        return redirect('/login')
     ads = Advertisement.objects.all()
     business = Business.objects.get(user_id=request.user.id)
     tparams = {'ads': ads, 'self': business}
@@ -381,6 +407,8 @@ def dashboard_my_ads(request):
 
 
 def dashboard_my_comments(request):
+    if not request.user.is_authenticated or request.user.business == None:
+        return redirect('/login')
     comments = Comment.objects.all()
     business = Business.objects.get(user_id=request.user.id)
     tparams = {'comments': comments, 'self': business}

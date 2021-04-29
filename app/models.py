@@ -15,14 +15,14 @@ class Business(models.Model):
     contact_email = models.EmailField(max_length=100)
     contact_phone = models.IntegerField()
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profilePhoto = models.FileField(upload_to="business_photos/", default="business_photos/userDefault.png")
+    profilePhoto = models.ImageField(upload_to="business_photos/", default="business_photos/userDefault.png")
 
     def __str__(self):
         return self.name
 
 
 class BusinessPhoto(models.Model):
-    path = models.FileField(upload_to="business_photos/")
+    path = models.ImageField(upload_to="business_photos/")
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
 
 class Event_Type(models.Model):
@@ -48,7 +48,7 @@ class Event(models.Model):
 
 
 class EventPhoto(models.Model):
-    path = models.FileField(upload_to="event_photos/")
+    path = models.ImageField(upload_to="event_photos/")
     event = models.ForeignKey(Event, related_name='images', on_delete=models.CASCADE)
 
 
