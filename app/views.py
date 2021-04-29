@@ -220,7 +220,7 @@ def filter(request):
 
 
 def dashboard_home(request):
-    if not request.user.is_authenticated or request.user.business == None:
+    if not request.user.is_authenticated or request.user.is_superuser:
         return redirect('/login/')
     events = Event.objects.all()
     ads = Advertisement.objects.all()
@@ -231,7 +231,7 @@ def dashboard_home(request):
 
 
 def dashboard_newevent(request):
-    if not request.user.is_authenticated or request.user.business == None:
+    if not request.user.is_authenticated or request.user.is_superuser:
         return redirect('/login/')
     if request.method == 'POST':
         form = EventForm(request.POST)
@@ -258,7 +258,7 @@ def dashboard_newevent(request):
 
 
 def dashboard_event(request, num):
-    if not request.user.is_authenticated or request.user.business == None:
+    if not request.user.is_authenticated or request.user.is_superuser:
         return redirect('/login/')
     current_event = Event.objects.get(id=num)
     if request.method == 'POST':
@@ -293,7 +293,7 @@ def dashboard_event(request, num):
 
 
 def dashboard_newad(request):
-    if not request.user.is_authenticated or request.user.business == None:
+    if not request.user.is_authenticated or request.user.is_superuser:
         return redirect('/login/')
     if request.method == 'POST':
         form = AdvertForm(request.POST)
@@ -316,7 +316,7 @@ def dashboard_newad(request):
 
 
 def dashboard_ad(request, num):
-    if not request.user.is_authenticated or request.user.business == None:
+    if not request.user.is_authenticated or request.user.is_superuser:
         return redirect('/login/')
     current_ad = Advertisement.objects.get(id=num)
     if request.method == 'POST':
@@ -343,7 +343,7 @@ def dashboard_ad(request, num):
 
 
 def dashboard_profile(request):
-    if not request.user.is_authenticated or request.user.business == None:
+    if not request.user.is_authenticated or request.user.is_superuser:
         return redirect('/login/')
     current_account = Business.objects.get(user_id=request.user.id)
     if request.method == 'POST':
@@ -389,7 +389,7 @@ def dashboard_profile(request):
 
 
 def dashboard_my_events(request):
-    if not request.user.is_authenticated or request.user.business == None:
+    if not request.user.is_authenticated or request.user.is_superuser:
         return redirect('/login/')
     events = Event.objects.all()
     business = Business.objects.get(user_id=request.user.id)
@@ -398,7 +398,7 @@ def dashboard_my_events(request):
 
 
 def dashboard_my_ads(request):
-    if not request.user.is_authenticated or request.user.business == None:
+    if not request.user.is_authenticated or request.user.is_superuser:
         return redirect('/login/')
     ads = Advertisement.objects.all()
     business = Business.objects.get(user_id=request.user.id)
@@ -407,7 +407,7 @@ def dashboard_my_ads(request):
 
 
 def dashboard_my_comments(request):
-    if not request.user.is_authenticated or request.user.business == None:
+    if not request.user.is_authenticated or request.user.is_superuser:
         return redirect('/login/')
     comments = Comment.objects.all()
     business = Business.objects.get(user_id=request.user.id)
